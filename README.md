@@ -26,4 +26,25 @@ A lightweight Java tool for Linux Mint that repeatedly simulates keypress events
 1. **Clone the repository**:
    ```bash
    git clone https://github.com/james-paul25/AutoKeyPresser.git
-   cd AutoKeyPresser
+   cd AutoKeyPresser/src
+
+2. **Compile the source:**:
+   ```bash
+   javac AutoKeyPresser.java
+
+
+3. **Run the program:**:
+   ```bash
+   java AutoKeyPresser
+
+- Make sure your target application is focused when the script runs.
+
+4. **Terminationoption:**:
+   - type ctrl + c
+   ```bash
+   pkill -f AutoKeyPresser
+
+## Author
+- Created by james‑paul25 — designed for effortless automation via Java key pressing.
+
+
