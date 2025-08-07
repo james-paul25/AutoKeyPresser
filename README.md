@@ -46,6 +46,6 @@ A lightweight Java tool for Linux Mint that repeatedly simulates keypress events
    - or type ctrl + c in the terminal
 
 ## Author
-- Created by james‑paul25 — designed for effortless automation via Java key pressing.
+- James Paul — designed for effortless automation via Java key pressing.
 
 
