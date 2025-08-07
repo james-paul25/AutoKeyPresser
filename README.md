@@ -39,10 +39,11 @@ A lightweight Java tool for Linux Mint that repeatedly simulates keypress events
 
 - Make sure your target application is focused when the script runs.
 
-4. **Terminationoption:**:
-   - type ctrl + c
+4. **Termination option:**:
    ```bash
    pkill -f AutoKeyPresser
+   ```
+   - or type ctrl + c in the terminal
 
 ## Author
 - Created by james‑paul25 — designed for effortless automation via Java key pressing.
