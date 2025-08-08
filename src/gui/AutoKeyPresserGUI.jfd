@@ -9,8 +9,8 @@ new FormModel {
 				name: "dialogPane"
 				"border": new javax.swing.border.EmptyBorder( 12, 12, 12, 12 )
 				add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class org.jdesktop.layout.GroupLayout ) {
-					"$horizontalGroup": "par l {seq l {space :p:100:p, par l {comp label1::l:p:56:p, comp label2::l:p::p, comp label3::l:p::p, comp label4::l:p::p}, space :::p, par l:::p {comp textField1::::112:x, comp textField2::::112:x, comp textField3::::112:x, comp textField4::::112:x}, space ::100:x}}"
-					"$verticalGroup": "par l {seq l {space :p:23:p, par b {comp textField1::b:p::p, comp label1::b:p::p}, space :::p, par b {comp label2::b:p::p, comp textField2::b:p::p}, space :::p, par b {comp label3::b:p::p, comp textField3::b:p::p}, space u:::p, par b {comp label4::b:p::p, comp textField4::b:p::p}, space ::10:x}}"
+					"$horizontalGroup": "par l {seq t {space ::144:x, comp label5:::p::p, space :p:47:p}, seq l {space :p:100:p, par l {par t:l {seq {comp button1:::p::p, space u:::p, comp button2:::p::p}, seq {par l {comp label1::l:p:56:p, comp label2::l:p::p, comp label3::l:p::p, comp label4::l:p::p, comp label6::l:p::p}, space :::p, par l:::p {comp textField1::::373:x, comp textField4::l::373:x, comp textField3::l::373:x, comp textField2::l::373:x, comp textField5::::373:x}}}, seq l {par t {comp label12:::p::p, seq {par l {comp label8::l:p::p, comp label7::l:p::p}, space s:::p, par l:::p {comp textField6::::77:x, comp textField7::::77:x}}}, space s:::p, par l {comp label9:::p::p, comp label10::l:p::p, comp label11:::p::p}}}, space ::14:x}}"
+					"$verticalGroup": "par l {seq l {par l {seq {comp label5:::p::p, space :p:3:p, par b {comp textField1::b:p::p, comp label1::b:p::p}, space :::p, par b {comp label2::b:p::p, comp textField2::b:p::p}, space :::p, par b {comp label3::b:p::p, comp textField3::b:p::p}, space u:::p, par b {comp label4::b:p::p, comp textField4::b:p::p}, space :::p, par b {comp label6::b:p::p, comp textField5::b:p::p}, space :::x, par b {comp label7::b:p::p, comp textField6::b:p::p, comp label10::b:p::p}, space :::p}, seq l {space s:::p, comp label9:::p::p, space :::x}}, par b {comp label8::b:p::p, comp textField7::b:p::p, comp label11::b:p::p}, space :::p, par b {comp button2::b:p::p, comp button1::b:p::p, comp label12::b:p::p}, space :::p}}"
 				} ) {
 					name: "contentPanel"
 					add( new FormComponent( "javax.swing.JLabel" ) {
@@ -41,40 +41,66 @@ new FormModel {
 					add( new FormComponent( "javax.swing.JTextField" ) {
 						name: "textField4"
 					} )
-				}, new FormLayoutConstraints( class java.lang.String ) {
-					"value": "North"
-				} )
-				add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class java.awt.GridBagLayout ) {
-					"$columnSpecs": "0:1.0, 80, 80"
-					"$rowSpecs": "0"
-					"$hGap": 5
-					"$vGap": 5
-				} ) {
-					name: "buttonBar"
-					"border": new javax.swing.border.EmptyBorder( 12, 0, 0, 0 )
-					add( new FormComponent( "javax.swing.JButton" ) {
-						name: "okButton"
-						"text": "OK"
-					}, new FormLayoutConstraints( class com.jformdesigner.runtime.GridBagConstraintsEx ) {
-						"gridx": 1
-						"gridy": 0
+					add( new FormComponent( "javax.swing.JLabel" ) {
+						name: "label5"
+						"text": "Put only 1 keyword every text field for smooth transaction"
+					} )
+					add( new FormComponent( "javax.swing.JLabel" ) {
+						name: "label6"
+						"text": "key 5"
+					} )
+					add( new FormComponent( "javax.swing.JTextField" ) {
+						name: "textField5"
+					} )
+					add( new FormComponent( "javax.swing.JLabel" ) {
+						name: "label7"
+						"text": "Time After 1 key"
+					} )
+					add( new FormComponent( "javax.swing.JTextField" ) {
+						name: "textField6"
+					} )
+					add( new FormComponent( "javax.swing.JLabel" ) {
+						name: "label8"
+						"text": "Time After all keys"
+					} )
+					add( new FormComponent( "javax.swing.JTextField" ) {
+						name: "textField7"
 					} )
 					add( new FormComponent( "javax.swing.JButton" ) {
-						name: "cancelButton"
-						"text": "Cancel"
-					}, new FormLayoutConstraints( class com.jformdesigner.runtime.GridBagConstraintsEx ) {
-						"gridx": 2
-						"gridy": 0
+						name: "button1"
+						"text": "START"
+						addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "startAutoKeyPresser", true ) )
+					} )
+					add( new FormComponent( "javax.swing.JButton" ) {
+						name: "button2"
+						"text": "STOP"
+						addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "stopAutoKeyPresser", true ) )
+					} )
+					add( new FormComponent( "javax.swing.JLabel" ) {
+						name: "label9"
+						"text": "text"
+					} )
+					add( new FormComponent( "javax.swing.JLabel" ) {
+						name: "label10"
+						"text": "in milliseconds e.g(500 = 5s)"
+					} )
+					add( new FormComponent( "javax.swing.JLabel" ) {
+						name: "label11"
+						"text": "in milliseconds e.g(500 = 5s)"
+					} )
+					add( new FormComponent( "javax.swing.JLabel" ) {
+						name: "label12"
+						"text": "Status:"
 					} )
 				}, new FormLayoutConstraints( class java.lang.String ) {
 					"value": "South"
 				} )
 			}, new FormLayoutConstraints( class java.lang.String ) {
-				"value": "Center"
+				"value": "North"
 			} )
 		}, new FormLayoutConstraints( null ) {
 			"location": new java.awt.Point( 0, 0 )
-			"size": new java.awt.Dimension( 400, 300 )
+			"size": new java.awt.Dimension( 575, 430 )
 		} )
 	}
 }
