@@ -2,6 +2,10 @@
 
 A simple, cross-platform Java Swing utility to automate key pressing — originally created to support game development (**AQW**), but handy for any repetitive input tasks.
 
+Screenshot of the GUI using my linux mint distro:
+
+![AutoKeyPresser GUI](screenshots/autokeypresser.png)
+
 ---
 
 ## Features
