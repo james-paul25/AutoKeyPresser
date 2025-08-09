@@ -28,7 +28,8 @@ jobs:
           javac -d out $(find src -name "*.java")
 
       - name: Create manifest
-        run: echo "Main-Class: AutoKeyPresser" > manifest.txt
+        run: 'echo "Main-Class: AutoKeyPresser" > manifest.txt'
+
 
       - name: Package JAR
         run: jar cfm AutoKeyPresser.jar manifest.txt -C out .
