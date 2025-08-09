@@ -84,6 +84,7 @@ java -version
    - Double-click the `.jar` file (if `.jar` files are associated with Java)
    - Or run in terminal/command prompt:
      ```bash
+     cd path/jar-file-downloaded/
      java -jar AutoKeyPresser.jar
      ```
 
