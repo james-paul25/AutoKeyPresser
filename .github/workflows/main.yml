@@ -38,7 +38,7 @@ jobs:
 
       # --- Create JAR ---
       - name: Create manifest
-        run: echo "Main-Class: AutoKeyPresser" > manifest.txt
+        run: 'echo "Main-Class: AutoKeyPresser" > manifest.txt'
 
       - name: Package JAR
         run: jar cfm AutoKeyPresser.jar manifest.txt -C out .
