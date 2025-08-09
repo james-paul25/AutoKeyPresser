@@ -82,11 +82,11 @@ new FormModel {
 					} )
 					add( new FormComponent( "javax.swing.JLabel" ) {
 						name: "label10"
-						"text": "in milliseconds e.g(500 = 5s)"
+						"text": "in milliseconds e.g(500 = .5s)"
 					} )
 					add( new FormComponent( "javax.swing.JLabel" ) {
 						name: "label11"
-						"text": "in milliseconds e.g(500 = 5s)"
+						"text": "in milliseconds e.g(5000 = 5s)"
 					} )
 					add( new FormComponent( "javax.swing.JLabel" ) {
 						name: "label12"

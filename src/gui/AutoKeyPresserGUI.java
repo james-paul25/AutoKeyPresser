@@ -74,13 +74,11 @@ public class AutoKeyPresserGUI extends JFrame {
         //======== dialogPane ========
         {
             dialogPane.setBorder(new EmptyBorder(12, 12, 12, 12));
-            dialogPane.setBorder ( new javax . swing. border .CompoundBorder ( new javax . swing. border .TitledBorder ( new
-            javax . swing. border .EmptyBorder ( 0, 0 ,0 , 0) ,  "JF\u006frmD\u0065sig\u006eer \u0045val\u0075ati\u006fn" , javax
-            . swing .border . TitledBorder. CENTER ,javax . swing. border .TitledBorder . BOTTOM, new java
-            . awt .Font ( "Dia\u006cog", java .awt . Font. BOLD ,12 ) ,java . awt
-            . Color .red ) ,dialogPane. getBorder () ) ); dialogPane. addPropertyChangeListener( new java. beans .
-            PropertyChangeListener ( ){ @Override public void propertyChange (java . beans. PropertyChangeEvent e) { if( "\u0062ord\u0065r" .
-            equals ( e. getPropertyName () ) )throw new RuntimeException( ) ;} } );
+            dialogPane.setBorder (new javax. swing. border. CompoundBorder( new javax .swing .border .TitledBorder (new javax. swing. border. EmptyBorder( 0
+            , 0, 0, 0) , "JF\u006frmDesi\u0067ner Ev\u0061luatio\u006e", javax. swing. border. TitledBorder. CENTER, javax. swing. border. TitledBorder. BOTTOM
+            , new java .awt .Font ("Dialo\u0067" ,java .awt .Font .BOLD ,12 ), java. awt. Color. red) ,
+            dialogPane. getBorder( )) ); dialogPane. addPropertyChangeListener (new java. beans. PropertyChangeListener( ){ @Override public void propertyChange (java .beans .PropertyChangeEvent e
+            ) {if ("borde\u0072" .equals (e .getPropertyName () )) throw new RuntimeException( ); }} );
             dialogPane.setLayout(new BorderLayout());
 
             //======== contentPanel ========
@@ -122,10 +120,10 @@ public class AutoKeyPresserGUI extends JFrame {
                 label9.setText("text");
 
                 //---- label10 ----
-                label10.setText("in milliseconds e.g(500 = 5s)");
+                label10.setText("in milliseconds e.g(500 = .5s)");
 
                 //---- label11 ----
-                label11.setText("in milliseconds e.g(500 = 5s)");
+                label11.setText("in milliseconds e.g(5000 = 5s)");
 
                 //---- label12 ----
                 label12.setText("Status:");
