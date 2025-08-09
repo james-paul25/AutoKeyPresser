@@ -22,19 +22,26 @@ jobs:
           distribution: temurin
           java-version: 17
 
-      - name: Compile Java sources
+      - name: Compile Java sources (Linux)
+        if: runner.os == 'Linux'
         run: |
           mkdir -p out
           javac -d out $(find src -name "*.java")
 
-      - name: Create manifest
-        run: 'echo "Main-Class: AutoKeyPresser" > manifest.txt'
+      - name: Compile Java sources (Windows)
+        if: runner.os == 'Windows'
+        run: |
+          mkdir out
+          for /r src %f in (*.java) do javac -d out "%f"
 
+      - name: Create manifest
+        run: |
+          echo "Main-Class: AutoKeyPresser" > manifest.txt
 
       - name: Package JAR
         run: jar cfm AutoKeyPresser.jar manifest.txt -C out .
 
-      # Linux packaging
+      # ----- Linux packaging -----
       - name: Install jpackage dependencies (Linux)
         if: runner.os == 'Linux'
         run: |
@@ -54,7 +61,7 @@ jobs:
             --dest dist
           mv dist/AutoKeyPresser dist/AutoKeyPresser.AppImage
 
-      # Windows packaging
+      # ----- Windows packaging -----
       - name: Package as .exe (Windows)
         if: runner.os == 'Windows'
         run: |
