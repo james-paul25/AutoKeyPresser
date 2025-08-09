@@ -1,106 +1,85 @@
-name: Build Java Swing App
+name: Build AutoKeyPresser
 
 on:
   push:
     branches:
       - main
+      - prod
   workflow_dispatch:
 
 jobs:
-  build-windows:
-    runs-on: windows-latest
+  build:
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [ubuntu-latest, windows-latest]
+
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
 
-      - name: Set up JDK 17
+      - name: Set up JDK
         uses: actions/setup-java@v4
         with:
-          distribution: temurin
-          java-version: 17
+          java-version: "21"
+          distribution: "temurin"
 
-      - name: Create output directory
-        run: mkdir out
-
-      - name: Compile Java sources
-        shell: cmd
-        run: |
-          for /r src %%f in (*.java) do javac -d out "%%f"
-
-      - name: Verify icons exist
-        run: |
-          if (-not (Test-Path "icons/icon.ico")) { throw "Missing icon.ico" }
-
-      - name: Package Windows EXE
-        run: |
-          jpackage --verbose `
-            --type exe `
-            --input out `
-            --main-class AutoKeyPresser `
-            --main-jar AutoKeyPresser.jar `
-            --name AutoKeyPresser `
-            --icon icons/icon.ico
-
-      - name: Upload Windows artifact
-        uses: actions/upload-artifact@v4
-        with:
-          name: AutoKeyPresser-Windows
-          path: AutoKeyPresser-*.exe
-
-  build-linux:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
-
-      - name: Install Linux jpackage dependencies
+      - name: Install jpackage dependencies (Linux only)
+        if: runner.os == 'Linux'
         run: |
           sudo apt-get update
           sudo apt-get install -y \
-            libfuse2 \
-            fakeroot \
-            binutils \
-            xdg-utils \
-            libasound2 \
-            libgtk-3-0 \
-            libnss3 \
-            libx11-xcb1 \
-            libxss1 \
-            libxtst6 \
-            libappindicator3-1 \
-            libxrandr2 \
-            libglib2.0-0
-
-      - name: Set up JDK 17
-        uses: actions/setup-java@v4
-        with:
-          distribution: temurin
-          java-version: 17
-
-      - name: Create output directory
-        run: mkdir out
+            libopenjfx-java libopenjfx-jni openjfx \
+            fakeroot libasound2-dev libcups2-dev \
+            libfontconfig1-dev libfreetype6-dev \
+            libpng-dev libjpeg-dev libgif-dev \
+            libxtst-dev libxt-dev libx11-dev libxext-dev \
+            libxrandr-dev libxrender-dev libxinerama-dev
 
       - name: Compile Java sources
         run: |
-          find src -name "*.java" > sources.txt
-          javac -d out @sources.txt
+          mkdir -p out/classes
+          javac -d out/classes src/AutoKeyPresser.java
 
-      - name: Verify icons exist
+      - name: Create manifest file
         run: |
-          test -f icons/icon.png || (echo "Missing icon.png" && exit 1)
+          echo "Main-Class: AutoKeyPresser" > manifest.txt
 
-      - name: Package Linux AppImage
+      - name: Create JAR file
         run: |
-          jpackage --verbose \
-            --type app-image \
+          jar cfm out/AutoKeyPresser.jar manifest.txt -C out/classes .
+
+      - name: Verify JAR contents
+        run: jar tf out/AutoKeyPresser.jar
+
+      - name: Prepare icons
+        run: |
+          mkdir -p icons
+          if [ ! -f icons/icon.ico ]; then
+            echo "Windows icon missing! Creating placeholder..."
+            curl -L -o icons/icon.ico https://raw.githubusercontent.com/james-paul25/AutoKeyPresser/main/icon.ico || true
+          fi
+          if [ ! -f icons/icon.png ]; then
+            echo "Linux icon missing! Creating placeholder..."
+            curl -L -o icons/icon.png https://raw.githubusercontent.com/james-paul25/AutoKeyPresser/main/icon.png || true
+          fi
+
+      - name: Package application
+        run: |
+          mkdir -p dist
+          jpackage \
+            --verbose \
             --input out \
-            --main-class AutoKeyPresser \
             --main-jar AutoKeyPresser.jar \
+            --main-class AutoKeyPresser \
             --name AutoKeyPresser \
-            --icon icons/icon.png
+            --app-version 1.0.0 \
+            --type $([[ "${{ runner.os }}" == "Windows" ]] && echo "exe" || echo "app-image") \
+            --icon $([[ "${{ runner.os }}" == "Windows" ]] && echo "icons/icon.ico" || echo "icons/icon.png") \
+            --dest dist
 
-      - name: Upload Linux artifact
+      - name: Upload packaged app
         uses: actions/upload-artifact@v4
         with:
-          name: AutoKeyPresser-Linux
-          path: AutoKeyPresser
+          name: AutoKeyPresser-${{ runner.os }}
+          path: dist
