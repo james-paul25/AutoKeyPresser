@@ -13,7 +13,7 @@ public class AutoKeyPresser {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        // Always run Swing GUI code on the Event Dispatch Thread
+
         SwingUtilities.invokeLater(() -> {
             AutoKeyPresserGUI dialog = new AutoKeyPresserGUI();
             dialog.setTitle("Auto Key Presser");
