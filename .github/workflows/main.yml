@@ -1,89 +1,106 @@
-name: Build and Package Java App (No Maven)
+name: Build Java Swing App
 
 on:
   push:
-    branches: [ main ]
+    branches:
+      - main
   workflow_dispatch:
 
 jobs:
-  build:
-    runs-on: ${{ matrix.os }}
-    strategy:
-      matrix:
-        os: [ubuntu-latest, windows-latest]
-
+  build-windows:
+    runs-on: windows-latest
     steps:
-      - name: Checkout source code
+      - name: Checkout code
         uses: actions/checkout@v4
 
-      - name: Set up Java 17
+      - name: Set up JDK 17
         uses: actions/setup-java@v4
         with:
           distribution: temurin
           java-version: 17
 
-      # --- Compile Java ---
-      - name: Compile Java sources (Linux)
-        if: runner.os == 'Linux'
-        run: |
-          mkdir -p out
-          javac -d out $(find src -name "*.java")
+      - name: Create output directory
+        run: mkdir out
 
-      - name: Compile Java sources (Windows)
-        if: runner.os == 'Windows'
-        run: |
-          mkdir out
-          for /r src %f in (*.java) do javac -d out "%f"
+      - name: Compile Java sources
         shell: cmd
-
-      # --- Create JAR ---
-      - name: Create manifest
-        run: 'echo "Main-Class: AutoKeyPresser" > manifest.txt'
-
-      - name: Package JAR
-        run: jar cfm AutoKeyPresser.jar manifest.txt -C out .
-
-      # --- Linux packaging ---
-      - name: Install jpackage dependencies (Linux)
-        if: runner.os == 'Linux'
         run: |
-          sudo apt-get update
-          sudo apt-get install -y libfuse2 fakeroot rpm binutils xdg-utils
+          for /r src %%f in (*.java) do javac -d out "%%f"
 
-      - name: Package as .AppImage (Linux)
-        if: runner.os == 'Linux'
+      - name: Verify icons exist
         run: |
-          mkdir dist
-          jpackage \
-            --type app-image \
-            --input . \
-            --main-jar AutoKeyPresser.jar \
-            --name AutoKeyPresser \
-            --main-class AutoKeyPresser \
-            --icon icons/icon.png \
-            --app-version 1.0 \
-            --dest dist
-          mv dist/AutoKeyPresser dist/AutoKeyPresser.AppImage
+          if (-not (Test-Path "icons/icon.ico")) { throw "Missing icon.ico" }
 
-      # --- Windows packaging ---
-      - name: Package as .exe (Windows)
-        if: runner.os == 'Windows'
+      - name: Package Windows EXE
         run: |
-          mkdir dist
-          jpackage ^
-            --type exe ^
-            --input . ^
-            --main-jar AutoKeyPresser.jar ^
-            --name AutoKeyPresser ^
-            --main-class AutoKeyPresser ^
-            --icon icons/icon.ico ^
-            --app-version 1.0 ^
-            --dest dist
-        shell: cmd
+          jpackage --verbose `
+            --type exe `
+            --input out `
+            --main-class AutoKeyPresser `
+            --main-jar AutoKeyPresser.jar `
+            --name AutoKeyPresser `
+            --icon icons/icon.ico
 
-      # --- Upload artifacts ---
-      - name: Upload artifacts
+      - name: Upload Windows artifact
         uses: actions/upload-artifact@v4
         with:
-          name: packaged-app-${{ matrix.os }}
-          path: dist/**
+          name: AutoKeyPresser-Windows
+          path: AutoKeyPresser-*.exe
+
+  build-linux:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Install Linux jpackage dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y \
+            libfuse2 \
+            fakeroot \
+            binutils \
+            xdg-utils \
+            libasound2 \
+            libgtk-3-0 \
+            libnss3 \
+            libx11-xcb1 \
+            libxss1 \
+            libxtst6 \
+            libappindicator3-1 \
+            libxrandr2 \
+            libglib2.0-0
+
+      - name: Set up JDK 17
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: 17
+
+      - name: Create output directory
+        run: mkdir out
+
+      - name: Compile Java sources
+        run: |
+          find src -name "*.java" > sources.txt
+          javac -d out @sources.txt
+
+      - name: Verify icons exist
+        run: |
+          test -f icons/icon.png || (echo "Missing icon.png" && exit 1)
+
+      - name: Package Linux AppImage
+        run: |
+          jpackage --verbose \
+            --type app-image \
+            --input out \
+            --main-class AutoKeyPresser \
+            --main-jar AutoKeyPresser.jar \
+            --name AutoKeyPresser \
+            --icon icons/icon.png
+
+      - name: Upload Linux artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: AutoKeyPresser-Linux
+          path: AutoKeyPresser
