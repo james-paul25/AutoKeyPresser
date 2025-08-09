@@ -22,6 +22,7 @@ jobs:
           distribution: temurin
           java-version: 17
 
+      # --- Compile Java ---
       - name: Compile Java sources (Linux)
         if: runner.os == 'Linux'
         run: |
@@ -33,24 +34,26 @@ jobs:
         run: |
           mkdir out
           for /r src %f in (*.java) do javac -d out "%f"
+        shell: cmd
 
+      # --- Create JAR ---
       - name: Create manifest
-        run: |
-          echo "Main-Class: AutoKeyPresser" > manifest.txt
+        run: echo "Main-Class: AutoKeyPresser" > manifest.txt
 
       - name: Package JAR
         run: jar cfm AutoKeyPresser.jar manifest.txt -C out .
 
-      # ----- Linux packaging -----
+      # --- Linux packaging ---
       - name: Install jpackage dependencies (Linux)
         if: runner.os == 'Linux'
         run: |
           sudo apt-get update
-          sudo apt-get install -y libfuse2 fakeroot rpm
+          sudo apt-get install -y libfuse2 fakeroot rpm binutils xdg-utils
 
       - name: Package as .AppImage (Linux)
         if: runner.os == 'Linux'
         run: |
+          mkdir dist
           jpackage \
             --type app-image \
             --input . \
@@ -58,13 +61,15 @@ jobs:
             --name AutoKeyPresser \
             --main-class AutoKeyPresser \
             --icon icons/icon.png \
+            --app-version 1.0 \
             --dest dist
           mv dist/AutoKeyPresser dist/AutoKeyPresser.AppImage
 
-      # ----- Windows packaging -----
+      # --- Windows packaging ---
       - name: Package as .exe (Windows)
         if: runner.os == 'Windows'
         run: |
+          mkdir dist
           jpackage ^
             --type exe ^
             --input . ^
@@ -72,8 +77,11 @@ jobs:
             --name AutoKeyPresser ^
             --main-class AutoKeyPresser ^
             --icon icons/icon.ico ^
+            --app-version 1.0 ^
             --dest dist
+        shell: cmd
 
+      # --- Upload artifacts ---
       - name: Upload artifacts
         uses: actions/upload-artifact@v4
         with:
