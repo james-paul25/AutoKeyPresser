@@ -127,7 +127,7 @@ Licensed under the **MIT License** — feel free to use, modify, and redistribut
    - Fork this repository on GitHub.
    - Clone your fork locally:
     ```bash
-     git clone https://github.com/james-paul25/AutoKeyPresser.git
+     git clone https://github.com/{your-usrname}/AutoKeyPresser.git
      cd AutoKeyPresser
      ```
 2. **Install Java JDK 17+**:
