@@ -1,8 +1,6 @@
 # AutoKeyPresser
 
-A simple, cross-platform Java Swing utility to automate key pressing — originally created to support game development (**AQW**), but handy for any repetitive input tasks.
-
-Screenshot of the GUI using my linux mint distro:
+A simple Java Swing utility to automate key pressing — originally created to support game development (**AQW**), but handy for any repetitive input tasks.
 
 ![AutoKeyPresser GUI](screenshots/autokeypresser.png)
 
@@ -14,96 +12,44 @@ Screenshot of the GUI using my linux mint distro:
 - ⌨ **Custom Key Bindings** — Choose exactly which keys to press.
 - ⏱ **Custom Delay Intervals** — Set precise time gaps between key presses.
 - 🔁 **Repeat Function** — Automatically loop the sequence until stopped.
-- 💻 **Cross-Platform** — Works on Windows, macOS, and Linux.
 - 🎮 **Game-Friendly** — Originally built for AQW, but works with any application.
-- ⚙ **Lightweight & Portable** — Just one `.jar` file, no installation required.
+- ⚙ **Lightweight & Portable** — Just one `.exe` file, no installer required.
 
 ---
 
-## Requirements
+## Installation (Windows)
 
-Before running AutoKeyPresser, you must have **Java JDK** installed.
+### Requirements
 
-### Install Java JDK
+You need **Java 21** (or newer) installed on your machine.
 
-#### Windows & macOS
-1. Download Java JDK from [Oracle JDK Downloads](https://www.oracle.com/java/technologies/javase-downloads.html) or [Adoptium](https://adoptium.net/).
-2. Install it following the on-screen instructions.
-3. Verify installation:
-   ```bash
-   java -version
-   ```
+Check if you already have it:
 
-#### Linux (Debian/Ubuntu-based)
 ```bash
-
-sudo apt update
-sudo apt install default-jdk
 java -version
 ```
 
-#### Linux (Fedora/RHEL-based)
-```bash
-sudo dnf install java-17-openjdk
-java -version
-```
----
+If it's not installed, download and install **Java 21 (JDK)** from [Eclipse Temurin](https://adoptium.net/temurin/releases/?version=21).
 
-## Grab the `.jar` and Run It
+### Steps
 
-**Use the JAR file directly — no installer needed.**
+1. Go to the [Releases](../../releases) page (or the repo root) and download **`AutoKeyPresser.exe`**.
+2. Make sure Java 21+ is installed (see above).
+3. Double-click **`AutoKeyPresser.exe`** to launch the app — no installation, no setup.
 
-### Steps:
+That's it. The app runs directly from the `.exe`.
 
-1. **Download** `AutoKeyPresser.jar`
-   - If you just cloned or downloaded this repository, the file is already in the project root.
-   - Or you can [download it directly here](https://github.com/james-paul25/AutoKeyPresser/raw/main/AutoKeyPresser.jar).
-
-
-2. **Install Java (JDK 17+)**  
-   You must have Java installed before running:
-
-   - **Windows/macOS/Linux:**  
-     Download and install the **official Oracle Java JDK 17** from:  
-     [https://www.oracle.com/java/technologies/javase/jdk17-archive-downloads.html](https://www.oracle.com/java/technologies/javase/jdk17-archive-downloads.html)
-
-   - **Linux (Alternative via package manager):**
-     ```bash
-     sudo apt update
-     sudo apt install openjdk-17-jre
-     ```
-   - **macOS:**
-     ```bash
-      brew install temurin17  
-   - **if you already install the java jdk**
-       ```bash
-        java -version
-       ```
-     
-3. **Run the app**:
-   - Double-click the `.jar` file (if `.jar` files are associated with Java)
-   - Or run in terminal/command prompt:
-     ```bash
-     cd path/jar-file-downloaded/
-     java -jar AutoKeyPresser.jar
-     ```
+> ⚠️ If Java isn't installed, Windows will show an error saying a Java Runtime Environment is required. Just install Java 21 from the link above and try again.
 
 ---
-
-
 
 ## Platform Compatibility
 
-- **Windows** — Tested on Windows 10/11
-- **Linux** — Works on Ubuntu and other distributions
-- **macOS** — Runs with Java installed; may require allowing the app in **System Preferences → Security**
-
----
-
-## Customize It
-
-This GUI lets you configure key sequences and timings — useful for game testing (like AQW) or automating repetitive keystrokes.  
-You can also modify the code if your needs change.
+- **Windows** — Native `.exe`, tested on Windows 10/11.
+- **Linux / macOS** — Run the app via the `.jar` file instead:
+  ```bash
+  java -jar AutoKeyPresser.jar
+  ```
 
 ---
 
@@ -121,38 +67,24 @@ Licensed under the **MIT License** — feel free to use, modify, and redistribut
 
 ## Contributions
 
-- 💡 Have ideas or features to suggest? Open an **issue** or **PR**!
+💡 Have ideas or features to suggest? Open an **issue** or **PR**!
 
-1. **Fork and Clone the Repository**:
-   - Fork this repository on GitHub.
-   - Clone your fork locally:
-    ```bash
-     git clone https://github.com/{your-usrname}/AutoKeyPresser.git
-     cd AutoKeyPresser
-     ```
-2. **Install Java JDK 17+**:
-   - Make sure Java JDK 17 or higher is installed. See the Requirements section.
-
-3. **Build the Project (Optional)**:
-   - If you want to build and test your changes locally:
+1. Fork and clone the repository:
    ```bash
-     mkdir -p out
-     javac -d out src/*.java
-     jar cfm AutoKeyPresser.jar manifest.txt -C out .
-     ```
-4. **Make Your Changes**:
-   - Modify or add features in the source code (src/ folder).
-   - Test your changes by running the .jar file.
-
-5. **Commit and Push**:
+   git clone https://github.com/james-paul25/AutoKeyPresser.git
+   cd AutoKeyPresser
+   ```
+2. Install Java JDK 21+.
+3. Build and test locally (optional):
    ```bash
-     git add .
-     git commit -m "Describe your changes"
-     git push origin <your-branch-name>
-     ```
-6. **Open a Pull Request**:
-
-   - Go to your fork on GitHub.
-   - Click Compare & pull request.
-   - Describe your changes and submit the PR.
-
+   mkdir -p out
+   javac -d out src/*.java
+   jar cfm AutoKeyPresser.jar manifest.txt -C out .
+   ```
+4. Make your changes, then commit and push:
+   ```bash
+   git add .
+   git commit -m "Describe your changes"
+   git push origin <your-branch-name>
+   ```
+5. Open a Pull Request on GitHub.
