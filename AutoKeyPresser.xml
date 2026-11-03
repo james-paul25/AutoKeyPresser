@@ -2,8 +2,8 @@
 <launch4jConfig>
   <dontWrapJar>false</dontWrapJar>
   <headerType>gui</headerType>
-  <jar>/home/james-paul25/IdeaProjects/AutoKeyPresser/AutoKeyPresser.jar</jar>
-  <outfile>/home/james-paul25/IdeaProjects/AutoKeyPresser/AutoKeyPresser.exe</outfile>
+  <jar>/home/james-paul25/IdeaProjects/AutoKeyPresser/Presser.jar</jar>
+  <outfile>/home/james-paul25/IdeaProjects/AutoKeyPresser/Presser.exe</outfile>
   <errTitle></errTitle>
   <cmdLine></cmdLine>
   <chdir>.</chdir>
@@ -11,13 +11,13 @@
   <downloadUrl></downloadUrl>
   <supportUrl></supportUrl>
   <stayAlive>false</stayAlive>
-  <restartOnCrash>true</restartOnCrash>
+  <restartOnCrash>false</restartOnCrash>
   <manifest></manifest>
   <icon></icon>
   <jre>
     <path>%JAVA_HOME%;%PATH%</path>
     <requiresJdk>false</requiresJdk>
-    <requires64Bit>false</requires64Bit>
+    <requires64Bit>true</requires64Bit>
     <minVersion>21</minVersion>
     <maxVersion></maxVersion>
   </jre>

@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<launch4jConfig>
+    <dontWrapJar>false</dontWrapJar>
+    <headerType>gui</headerType>
+    <jar>target/dist/AutoKeyPresser.jar</jar>
+    <outfile>AutoKeyPresser.exe</outfile>
+    <errTitle>Auto Key Presser</errTitle>
+    <cmdLine></cmdLine>
+    <chdir>.</chdir>
+    <priority>normal</priority>
+    <downloadUrl>https://adoptium.net/temurin/releases/?version=21</downloadUrl>
+    <supportUrl></supportUrl>
+    <stayAlive>false</stayAlive>
+    <restartOnCrash>false</restartOnCrash>
+    <manifest></manifest>
+    <icon>icons/icon.ico</icon>
+    <jre>
+        <path>%JAVA_HOME%;%PATH%</path>
+        <requiresJdk>false</requiresJdk>
+        <requires64Bit>true</requires64Bit>
+        <minVersion>21</minVersion>
+        <maxVersion></maxVersion>
+    </jre>
+</launch4jConfig>

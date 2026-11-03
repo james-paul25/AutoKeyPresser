@@ -1,4 +1,5 @@
 service/Presser.class
+app/Launcher.class
 service/WindowInfo.class
 service/RobotKeySender.class
 service/WindowsBackend.class

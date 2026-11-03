@@ -6,18 +6,9 @@ A simple Java Swing utility to automate key pressing — originally created to s
 
 ---
 
-## Features
-
-- 🖱 **Graphical Interface** — No need to deal with command-line automation tools.
-- ⌨ **Custom Key Bindings** — Choose exactly which keys to press.
-- ⏱ **Custom Delay Intervals** — Set precise time gaps between key presses.
-- 🔁 **Repeat Function** — Automatically loop the sequence until stopped.
-- 🎮 **Game-Friendly** — Originally built for AQW, but works with any application.
-- ⚙ **Lightweight & Portable** — Just one `.exe` file, no installer required.
-
----
-
 ## Installation (Windows)
+
+Download the Presser.exe
 
 ### Requirements
 
@@ -48,7 +39,7 @@ That's it. The app runs directly from the `.exe`.
 - **Windows** — Native `.exe`, tested on Windows 10/11.
 - **Linux / macOS** — Run the app via the `.jar` file instead:
   ```bash
-  java -jar AutoKeyPresser.jar
+  java -jar Presser.jar
   ```
 
 ---
