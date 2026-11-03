@@ -29,9 +29,9 @@ public class AutoKeyPresserGUI extends VBox {
     private static final Color RED = Color.web("#e5484d");
 
     private final TextField[] keyFields = new TextField[5];
-    private final TextField afterKeyField = numberField("500");
-    private final TextField afterAllField = numberField("5000");
-    private final TextField startDelayField = numberField("3000");
+    private final TextField afterKeyField = numberField("0.5");
+    private final TextField afterAllField = numberField("5");
+    private final TextField startDelayField = numberField("3");
     private final CheckBox onTopBox = new CheckBox("Keep window on top");
 
     private final Circle statusDot = new Circle(5, GRAY);
@@ -88,9 +88,9 @@ public class AutoKeyPresserGUI extends VBox {
         grid.setHgap(12);
         grid.setVgap(10);
 
-        addTimingRow(grid, 0, "After each key", afterKeyField, "ms  (500 = 0.5 s)");
-        addTimingRow(grid, 1, "After all keys", afterAllField, "ms  (5000 = 5 s)");
-        addTimingRow(grid, 2, "Start delay", startDelayField, "ms  (time to click your game)");
+        addTimingRow(grid, 0, "After each key", afterKeyField, "seconds  (0.5 = half a second)");
+        addTimingRow(grid, 1, "After all keys", afterAllField, "seconds  (5 = five seconds)");
+        addTimingRow(grid, 2, "Start delay", startDelayField, "seconds  (time to click your game)");
         grid.add(onTopBox, 0, 3, 3, 1);
         GridPane.setMargin(onTopBox, new Insets(6, 0, 0, 0));
 
@@ -131,6 +131,13 @@ public class AutoKeyPresserGUI extends VBox {
         return box;
     }
 
+    private static int secondsToMillis(String text) {
+        double seconds = Double.parseDouble(text.trim().replace(',', '.'));
+        if (seconds < 0)
+            throw new NumberFormatException("negative");
+        return (int) Math.round(seconds * 1000);
+    }
+
     private static void addTimingRow(GridPane grid, int row, String label, TextField field, String unit) {
         Label l = new Label(label);
         l.getStyleClass().add("field-label");
@@ -143,7 +150,8 @@ public class AutoKeyPresserGUI extends VBox {
     private static TextField numberField(String initial) {
         TextField tf = new TextField(initial);
         tf.setPrefWidth(100);
-        tf.setTextFormatter(new TextFormatter<>(c -> c.getControlNewText().matches("\\d{0,7}") ? c : null));
+        tf.setTextFormatter(
+                new TextFormatter<>(c -> c.getControlNewText().matches("\\d{0,4}([.,]\\d{0,3})?") ? c : null));
         return tf;
     }
 
@@ -160,11 +168,15 @@ public class AutoKeyPresserGUI extends VBox {
 
         int afterKey, afterAll, startDelay;
         try {
-            afterKey = Integer.parseInt(afterKeyField.getText().trim());
-            afterAll = Integer.parseInt(afterAllField.getText().trim());
-            startDelay = Integer.parseInt(startDelayField.getText().trim());
+            afterKey = secondsToMillis(afterKeyField.getText());
+            afterAll = secondsToMillis(afterAllField.getText());
+            startDelay = secondsToMillis(startDelayField.getText());
         } catch (NumberFormatException ex) {
-            showError("Timing fields must be whole numbers.");
+            showError("Timing fields must be numbers, e.g. 0.5 or 3.");
+            return;
+        }
+        if (afterAll < 10) {
+            showError("'After all keys' must be at least 0.01 seconds.");
             return;
         }
 
@@ -216,4 +228,5 @@ public class AutoKeyPresserGUI extends VBox {
         afterAllField.setDisable(disabled);
         startDelayField.setDisable(disabled);
     }
+
 }
