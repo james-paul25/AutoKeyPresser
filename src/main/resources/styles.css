@@ -1,0 +1,67 @@
+.root-pane {
+    -fx-background-color: #14161c;
+    -fx-font-family: "Segoe UI";
+    -fx-font-size: 13px;
+    -fx-focus-color: transparent;
+    -fx-faint-focus-color: transparent;
+}
+
+.app-title    { -fx-text-fill: #f2f4f8; -fx-font-size: 22px; -fx-font-weight: bold; }
+.app-subtitle { -fx-text-fill: #8b93a7; }
+
+.card {
+    -fx-background-color: #1c1f28;
+    -fx-background-radius: 12;
+    -fx-border-color: #2a2e3a;
+    -fx-border-radius: 12;
+    -fx-padding: 16;
+}
+.card-title { -fx-text-fill: #f2f4f8; -fx-font-size: 14px; -fx-font-weight: bold; }
+.card-hint  { -fx-text-fill: #8b93a7; }
+.field-label{ -fx-text-fill: #cfd5e4; }
+.key-index  { -fx-text-fill: #8b93a7; -fx-font-size: 11px; }
+
+.text-field {
+    -fx-background-color: #12141a;
+    -fx-text-fill: #f2f4f8;
+    -fx-prompt-text-fill: #4a5064;
+    -fx-border-color: #2f3442;
+    -fx-border-radius: 8;
+    -fx-background-radius: 8;
+    -fx-highlight-fill: #4c8dff;
+}
+.text-field:focused  { -fx-border-color: #4c8dff; }
+.text-field:disabled { -fx-opacity: 0.5; }
+
+.key-field {
+    -fx-alignment: center;
+    -fx-font-family: "Consolas";
+    -fx-font-size: 22px;
+    -fx-font-weight: bold;
+}
+
+.check-box { -fx-text-fill: #cfd5e4; }
+.check-box .box {
+    -fx-background-color: #12141a;
+    -fx-border-color: #2f3442;
+    -fx-border-radius: 4;
+    -fx-background-radius: 4;
+}
+.check-box:selected .box  { -fx-background-color: #4c8dff; -fx-border-color: #4c8dff; }
+.check-box:selected .mark { -fx-background-color: white; }
+
+.status-label { -fx-text-fill: #cfd5e4; -fx-font-weight: bold; }
+.status-error { -fx-text-fill: #ff6b70; }
+
+.start-button, .stop-button {
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+    -fx-background-radius: 8;
+    -fx-padding: 9 26 9 26;
+    -fx-cursor: hand;
+}
+.start-button { -fx-background-color: #2fbf71; }
+.start-button:hover { -fx-background-color: #3ad483; }
+.stop-button  { -fx-background-color: #e5484d; }
+.stop-button:hover  { -fx-background-color: #f0595e; }
+.start-button:disabled, .stop-button:disabled { -fx-opacity: 0.35; -fx-cursor: default; }
