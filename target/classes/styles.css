@@ -88,3 +88,19 @@
 .combo-box-popup .list-cell { -fx-text-fill: #f2f4f8; -fx-background-color: #1c1f28; -fx-padding: 6 10 6 10; }
 .combo-box-popup .list-cell:hover { -fx-background-color: #2a2e3a; }
 .combo-box-popup .list-cell:selected { -fx-background-color: #4c8dff; }
+
+/* compact buttons inside the control card and the mini bar */
+.control-button { -fx-padding: 9 0 9 0; }
+.mini-button    { -fx-padding: 7 14 7 14; }
+
+/* mini bar (dark) */
+.mini-root {
+    -fx-background-color: #1c1f28;
+    -fx-background-radius: 12;
+    -fx-border-color: #2f3442;
+    -fx-border-radius: 12;
+    -fx-font-family: "Segoe UI";
+    -fx-font-size: 13px;
+    -fx-focus-color: transparent;
+    -fx-faint-focus-color: transparent;
+}

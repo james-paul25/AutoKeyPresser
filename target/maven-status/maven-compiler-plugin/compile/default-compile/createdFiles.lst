@@ -1,3 +1,9 @@
 service/Presser.class
+service/WindowInfo.class
+service/RobotKeySender.class
+service/WindowsBackend.class
 app/AutoKeyPresser.class
+service/WindowFinder.class
 gui/AutoKeyPresserGUI.class
+service/KeySender.class
+service/XdotoolKeySender.class
