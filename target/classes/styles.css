@@ -65,3 +65,26 @@
 .stop-button  { -fx-background-color: #e5484d; }
 .stop-button:hover  { -fx-background-color: #f0595e; }
 .start-button:disabled, .stop-button:disabled { -fx-opacity: 0.35; -fx-cursor: default; }
+
+.find-button {
+    -fx-background-color: #2a2e3a;
+    -fx-text-fill: #f2f4f8;
+    -fx-background-radius: 8;
+    -fx-padding: 6 16 6 16;
+    -fx-cursor: hand;
+}
+.find-button:hover { -fx-background-color: #343949; }
+.find-button:disabled { -fx-opacity: 0.35; }
+
+.combo-box-base {
+    -fx-background-color: #12141a;
+    -fx-border-color: #2f3442;
+    -fx-border-radius: 8;
+    -fx-background-radius: 8;
+}
+.combo-box .list-cell { -fx-text-fill: #f2f4f8; -fx-background-color: transparent; }
+.combo-box .arrow { -fx-background-color: #8b93a7; }
+.combo-box-popup .list-view { -fx-background-color: #1c1f28; -fx-border-color: #2f3442; }
+.combo-box-popup .list-cell { -fx-text-fill: #f2f4f8; -fx-background-color: #1c1f28; -fx-padding: 6 10 6 10; }
+.combo-box-popup .list-cell:hover { -fx-background-color: #2a2e3a; }
+.combo-box-popup .list-cell:selected { -fx-background-color: #4c8dff; }
