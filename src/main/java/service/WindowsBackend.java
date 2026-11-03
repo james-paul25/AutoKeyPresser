@@ -26,7 +26,7 @@ final class WindowsBackend {
     static List<WindowInfo> find(String text) {
         List<WindowInfo> out = new ArrayList<>();
         String needle = text.toLowerCase();
-        User32.INSTANCE.EnumWindows((hwnd, data) -> {
+        User32.INSTANCE.EnumWindows((hwnd, dagta) -> {
             if (User32.INSTANCE.IsWindowVisible(hwnd)) {
                 char[] buf = new char[512];
                 User32.INSTANCE.GetWindowText(hwnd, buf, buf.length);
